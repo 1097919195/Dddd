@@ -42,5 +42,29 @@
         android:layout_height="wrap_content"
         android:text="to ViewPager"/>
 
+    <Button
+        android:id="@+id/btn_toast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义中间的toast"/>
+
+    <ViewFlipper
+        android:id="@+id/vflp_help"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@anim/right_in"
+        android:outAnimation="@anim/right_out"
+        android:flipInterval="3000">
+
+        <include layout="@layout/include_page_help_one" />
+
+        <include layout="@layout/include_page_help_two" />
+
+        <include layout="@layout/include_page_help_three" />
+
+        <include layout="@layout/include_page_help_four" />
+
+    </ViewFlipper>
+
 
 </LinearLayout>

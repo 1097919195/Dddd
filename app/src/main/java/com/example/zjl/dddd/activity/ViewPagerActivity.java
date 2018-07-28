@@ -26,6 +26,7 @@ import com.jaydenxiao.common.commonwidget.ViewPagerFixed;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 
@@ -50,6 +51,7 @@ public class ViewPagerActivity extends BaseActivity {
 
     boolean isAutoPlay = false;
     private Handler handler;
+    private static final int SEND_MSG = 1;
     private int currentItem = 1;
     private int delay = 3000;
 
@@ -72,6 +74,7 @@ public class ViewPagerActivity extends BaseActivity {
 
         NewsPhotoDetail.Picture picture1s = new NewsPhotoDetail.Picture();
         NewsPhotoDetail.Picture picture4s = new NewsPhotoDetail.Picture();
+        //first(网络图片)
         picture1s.setImgSrc("http://cms-bucket.nosdn.127.net/2018/07/14/f6fc13e424b44ce48800bf3b90a708e0.png");
         picture4s.setImgSrc("http://cms-bucket.nosdn.127.net/2018/07/14/6b574bfcbecb42b89e699ab0ea6f04f2.jpeg");
 
@@ -79,6 +82,16 @@ public class ViewPagerActivity extends BaseActivity {
         picture2.setImgSrc("http://cms-bucket.nosdn.127.net/2018/07/14/bfed70351d7046b09c1ecf51c86915f7.png");
         picture3.setImgSrc("http://cms-bucket.nosdn.127.net/2018/07/14/77ce1bebc2b64e2cac7af71cf71ff2c1.jpeg");
         picture4.setImgSrc("http://cms-bucket.nosdn.127.net/2018/07/14/6b574bfcbecb42b89e699ab0ea6f04f2.jpeg");
+
+        //second(本地mipmap图片)
+//        picture1s.setImgSrc("1");
+//        picture4s.setImgSrc("4");
+//
+//        picture1.setImgSrc("1");
+//        picture2.setImgSrc("2");
+//        picture3.setImgSrc("3");
+//        picture4.setImgSrc("4");
+
         List<NewsPhotoDetail.Picture> pictureList = new ArrayList<>();
         pictureList.add(picture4s);
         pictureList.add(picture1);
@@ -103,10 +116,69 @@ public class ViewPagerActivity extends BaseActivity {
             isAutoPlay = false;
         } else {
             isAutoPlay = true;
-            handler = new Handler();
-            handler.postDelayed(task, delay);
+            handler = new Handler(){
+                @Override
+                public void handleMessage(Message msg) {
+                    super.handleMessage(msg);
+                    if (msg.what == SEND_MSG) {
+                        viewPagerFixed.setCurrentItem(currentItem);
+                    }
+                }
+            };
+            handler.postDelayed(task, delay);//方法一
+//            initTimer();//方法二
+
         }
     }
+
+    private void initTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask()
+        {
+            @Override
+            public void run() {
+                if (isAutoPlay) {
+                    currentItem++;
+//                //当currentItem等于图片大小的时候记得将 currentItem重置为1
+                    if (currentItem > mPhotoDetailFragmentList.size()) {
+                        currentItem = 1;
+                    }
+                    // 正常每隔3秒播放一张图片
+
+                    Message message = new Message();
+                    message.what = SEND_MSG;
+                    handler.sendMessage(message);
+                } else {
+                    // 如果处于拖拽状态停止自动播放，会每隔5秒检查一次是否可以正常自动播放。
+//                    timer.cancel();
+                }
+            }
+        }, delay, delay);
+
+
+    }
+
+    Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            if (isAutoPlay) {
+                currentItem++;
+//                //当currentItem等于图片大小的时候记得将 currentItem重置为1
+                if (currentItem > mPhotoDetailFragmentList.size()) {
+                    currentItem = 1;
+                }
+                // 正常每隔3秒播放一张图片
+                Message message = new Message();
+                message.what = SEND_MSG;
+                handler.sendMessage(message);
+
+                handler.postDelayed(task, delay);
+            } else {
+                // 如果处于拖拽状态停止自动播放，会每隔5秒检查一次是否可以正常自动播放。
+                handler.postDelayed(task, 5000);
+            }
+        }
+    };
 
     private void initViewPager() {
         List<Integer> list = new ArrayList<>();
@@ -201,42 +273,6 @@ public class ViewPagerActivity extends BaseActivity {
 
     private void setDetailTitle(int position) {
     }
-
-    private Runnable task = new Runnable() {
-        @Override
-        public void run() {
-            if (isAutoPlay) {
-                currentItem++;
-//                //当currentItem等于图片大小的时候记得将 currentItem重置为1
-                if (currentItem > mPhotoDetailFragmentList.size()-2) {
-                    currentItem = 1;
-                }
-                // 正常每隔3秒播放一张图片
-//                viewPagerFixed.setCurrentItem(currentItem);
-                switch (currentItem) {
-                    case 1:
-                        rg.check(R.id.rb0);
-                        break;
-                    case 2:
-                        rg.check(R.id.rb1);
-                        break;
-                    case 3:
-                        rg.check(R.id.rb2);
-                        break;
-                    case 4:
-                        rg.check(R.id.rb3);
-                        break;
-                    default:
-                        break;
-                }
-                handler.postDelayed(task, delay);
-            } else {
-                // 如果处于拖拽状态停止自动播放，会每隔5秒检查一次是否可以正常自动播放。
-                handler.postDelayed(task, 5000);
-            }
-        }
-    };
-
 
     private void initListener() {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
