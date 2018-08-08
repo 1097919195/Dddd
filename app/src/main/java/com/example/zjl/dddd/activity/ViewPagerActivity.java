@@ -121,7 +121,10 @@ public class ViewPagerActivity extends BaseActivity {
                 public void handleMessage(Message msg) {
                     super.handleMessage(msg);
                     if (msg.what == SEND_MSG) {
-                        viewPagerFixed.setCurrentItem(currentItem);
+                        if (viewPagerFixed != null) {
+                            viewPagerFixed.setCurrentItem(currentItem);
+                        }
+
                     }
                 }
             };
