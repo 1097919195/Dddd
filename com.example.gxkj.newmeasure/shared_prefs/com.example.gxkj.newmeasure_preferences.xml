@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <boolean name="preferences_bulk_mode" value="false" />
+    <string name="CONTRACT_NUM">default</string>
+    <boolean name="preferences_copy_to_clipboard" value="true" />
+    <string name="USERINFO_PASS">123456</string>
+    <boolean name="preferences_vibrate" value="false" />
+    <boolean name="preferences_disable_barcode_scene_mode" value="true" />
+    <boolean name="preferences_decode_1D_industrial" value="true" />
+    <boolean name="preferences_invert_scan" value="false" />
+    <boolean name="preferences_orientation" value="true" />
+    <boolean name="IS_FIRST_RUN" value="true" />
+    <boolean name="preferences_remember_duplicates" value="false" />
+    <boolean name="preferences_auto_open_web" value="false" />
+    <boolean name="preferences_decode_PDF417" value="false" />
+    <string name="preferences_front_light_mode">OFF</string>
+    <boolean name="preferences_decode_1D_product" value="true" />
+    <string name="CONTRACT_ID_SP">default</string>
+    <boolean name="preferences_disable_exposure" value="true" />
+    <boolean name="preferences_history" value="true" />
+    <boolean name="preferences_decode_Data_Matrix" value="true" />
+    <string name="preferences_search_country">-</string>
+    <boolean name="preferences_decode_QR" value="true" />
+    <boolean name="preferences_decode_Aztec" value="false" />
+    <string name="LOGIN_TOKEN">bearereyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvbi5ucGNsby5jb21cL2FwaVwvY2xpZW50XC9sb2dpbiIsImlhdCI6MTUzNTM1NzY0OSwiZXhwIjoxNTM1NDI5NjQ5LCJuYmYiOjE1MzUzNTc2NDksImp0aSI6IjVweHcweWUzdTI1RHZJQTUiLCJzdWIiOiI1YjcyNmVjOTkxMzRjYTQyMjAzZDFlNDIiLCJwcnYiOiIzYmJmMjcyYmVkNzRiZWRhYjA3MmIzNmQxYTUxYTAyNGY2MzhmM2ExIn0.Lq5xHxVrXPA-lRUD2NeZf92F5gVaxC9qw5ZdpJhIR4E</string>
+    <string name="USERINFO_NAME">15988254555</string>
+    <boolean name="preferences_disable_continuous_focus" value="true" />
+    <boolean name="preferences_supplemental" value="true" />
+    <boolean name="preferences_auto_focus" value="true" />
+    <boolean name="preferences_play_beep" value="true" />
+    <boolean name="preferences_disable_metering" value="true" />
+</map>
