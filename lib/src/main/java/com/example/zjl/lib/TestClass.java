@@ -4,7 +4,7 @@ package com.example.zjl.lib;
  * Created by Administrator on 2018/7/23 0023.
  */
 
-public class testClass {
+public class TestClass{
     /**
      * printf主要是继承了C语言的printf的一些特性，可以进行格式化输出
      * print就是一般的标准输出，但是不换行
@@ -18,6 +18,10 @@ public class testClass {
         haha.Dothing("call ...");
 
         testString();
+
+        //模拟android异常捕捉
+        CreateErrorClass createError = new CreateErrorClass();
+        createError.writeFile();//假装造成异常然后写入SD卡
     }
 
     //打印字符串测试
@@ -50,7 +54,6 @@ public class testClass {
         String newString = new String(chars, 0, chars.length);//将字符数组转化为字符串
         System.out.println("newString-"+newString);
     }
-
 
     public static class Presenter extends TestOtherInterface.BaseDothing implements TestInterface, TestOtherInterface{
 
