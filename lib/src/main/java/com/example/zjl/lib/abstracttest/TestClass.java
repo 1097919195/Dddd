@@ -20,6 +20,7 @@ public class TestClass{
         System.out.println("asdf");
         Presenter haha = new Presenter();
         haha.Dothing("call ...");
+        haha.doSomething();
 
         testString();
 
@@ -63,7 +64,7 @@ public class TestClass{
 
         @Override
         public void doSomething() {
-
+            System.out.println("被调用了呢");
         }
 
         @Override
