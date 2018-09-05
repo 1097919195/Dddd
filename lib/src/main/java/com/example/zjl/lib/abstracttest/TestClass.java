@@ -1,4 +1,8 @@
-package com.example.zjl.lib;
+package com.example.zjl.lib.abstracttest;
+
+import com.example.zjl.lib.abstracttest.CreateErrorClass;
+import com.example.zjl.lib.abstracttest.TestInterface;
+import com.example.zjl.lib.abstracttest.TestOtherInterface;
 
 /**
  * Created by Administrator on 2018/7/23 0023.

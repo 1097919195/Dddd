@@ -1,5 +1,8 @@
-package com.example.zjl.lib;
+package com.example.zjl.lib.abstracttest;
 
+
+import com.example.zjl.lib.abstracttest.Animal;
+import com.example.zjl.lib.abstracttest.Dog;
 
 /**
  * 多态指的是对象的多种形态。多态有两种：引用多态和方法多态。继承是多态的实现基础。
