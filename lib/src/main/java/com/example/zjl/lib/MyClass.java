@@ -2,6 +2,7 @@ package com.example.zjl.lib;
 
 import java.lang.ref.WeakReference;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class MyClass {
     //声明：对异常不处理，收到异常我也向外抛
@@ -50,6 +51,9 @@ public class MyClass {
             System.out.println("输入的数据为：" + str1);
         }
         scan.close();
+
+        Logger logger = Logger.getLogger("----");
+        logger.info("info==" + "asdfasdf");
 
     }
 
