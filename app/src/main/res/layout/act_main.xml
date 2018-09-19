@@ -43,6 +43,12 @@
         android:text="to ViewPager"/>
 
     <Button
+        android:id="@+id/toTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="测试界面"/>
+
+    <Button
         android:id="@+id/btn_toast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
