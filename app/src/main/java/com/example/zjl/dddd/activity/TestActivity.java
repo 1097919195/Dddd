@@ -137,7 +137,7 @@ public class TestActivity extends AppCompatActivity {
     public void getHttp() {
         OkHttpClient mClient = new OkHttpClient();
         Request.Builder requestBuilder = new Request.Builder()
-                .url("http://192.168.199.163:80/json.txt");
+                .url("http://192.168.199.163:80/json.txt");//直接开启 phpstudy 放一个json文本测试访问即可
         final Request request = requestBuilder.build();
         Call mcall = mClient.newCall(request);
         mcall.enqueue(new Callback() {
