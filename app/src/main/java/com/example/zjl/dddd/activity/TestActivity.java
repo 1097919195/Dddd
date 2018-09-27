@@ -24,6 +24,7 @@ import com.example.zjl.dddd.R;
 import com.example.zjl.dddd.bean.SortModel;
 import com.jaydenxiao.common.commonutils.LogUtils;
 import com.jaydenxiao.common.commonutils.ToastUtil;
+import com.vector.update_app.UpdateAppManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,18 +41,20 @@ import okhttp3.Request;
 import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import util.UpdateAppUtils;
 
 public class TestActivity extends AppCompatActivity {
 
     private ViewFlipper vflp_help;
     List<SortModel> mAllContactsList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_test);
 
         ContentResolver resolver = getApplicationContext().getContentResolver();
-        Cursor phoneCursor = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, new String[] { ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER, "sort_key" }, null, null, "sort_key COLLATE LOCALIZED ASC");
+        Cursor phoneCursor = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER, "sort_key"}, null, null, "sort_key COLLATE LOCALIZED ASC");
         if (phoneCursor == null || phoneCursor.getCount() == 0) {
             Toast.makeText(getApplicationContext(), "未获得读取联系人权限 或 未获得联系人数据", Toast.LENGTH_SHORT).show();
             return;
@@ -76,7 +79,6 @@ public class TestActivity extends AppCompatActivity {
 
         ToastUtil.showShort(mAllContactsList.get(0).number);
         LogUtils.loge(mAllContactsList.get(0).toString());
-
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -126,12 +128,26 @@ public class TestActivity extends AppCompatActivity {
         manager.notify(2, notification);
     }
 
-    public void OkHttp(View view){
+    public void OkHttp(View view) {
         getHttp();
     }
 
-    public void Retrofit(View view){
+    public void Retrofit(View view) {
         getRetrofit();
+    }
+
+    //APP更新
+    public void updateApp(View view) {
+        UpdateAppUtils.from(this)
+                .checkBy(UpdateAppUtils.CHECK_BY_VERSION_NAME) //更新检测方式，默认为VersionCode
+                .serverVersionCode(1)
+                .serverVersionName("2.0")//要大于1.0
+                .apkPath("https://www.npclo.com/dlo")
+                .showNotification(false) //是否显示下载进度到通知栏，默认为true
+                .updateInfo("更新更新")  //更新日志信息 String
+                .downloadBy(UpdateAppUtils.DOWNLOAD_BY_BROWSER) //下载方式：app下载、手机浏览器下载。默认app下载
+                .isForce(true) //是否强制更新，默认false 强制更新情况下用户不同意更新则不能使用app
+                .update();
     }
 
     public void getHttp() {
@@ -145,10 +161,11 @@ public class TestActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 Log.e("log", "Error" + e.toString());
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String jsonStr=response.body().string();
-                Log.e("log",jsonStr);
+                String jsonStr = response.body().string();
+                Log.e("log", jsonStr);
 //                JSONArray jsonArray= null;
 //                try {
 //                    jsonArray = new JSONArray(jsonStr);
@@ -192,6 +209,7 @@ public class TestActivity extends AppCompatActivity {
 //                Log.e("log", "Error" + t.toString());
 //            }
 //        });
+
     }
 
 
