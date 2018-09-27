@@ -17,4 +17,16 @@
         android:layout_height="wrap_content"
         android:text="低级通知"
         android:onClick="sendSubscribeMsg"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OkHttpClient"
+        android:onClick="OkHttp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retrofit"
+        android:onClick="Retrofit"/>
 </LinearLayout>

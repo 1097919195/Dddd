@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -24,8 +25,21 @@ import com.example.zjl.dddd.bean.SortModel;
 import com.jaydenxiao.common.commonutils.LogUtils;
 import com.jaydenxiao.common.commonutils.ToastUtil;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -111,5 +125,74 @@ public class TestActivity extends AppCompatActivity {
                 .build();
         manager.notify(2, notification);
     }
+
+    public void OkHttp(View view){
+        getHttp();
+    }
+
+    public void Retrofit(View view){
+        getRetrofit();
+    }
+
+    public void getHttp() {
+        OkHttpClient mClient = new OkHttpClient();
+        Request.Builder requestBuilder = new Request.Builder()
+                .url("http://192.168.199.163:80/json.txt");
+        final Request request = requestBuilder.build();
+        Call mcall = mClient.newCall(request);
+        mcall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e("log", "Error" + e.toString());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String jsonStr=response.body().string();
+                Log.e("log",jsonStr);
+//                JSONArray jsonArray= null;
+//                try {
+//                    jsonArray = new JSONArray(jsonStr);
+//                    for (int i = 0; i <jsonArray.length(); i++) {
+//                        JSONObject jsonObject=jsonArray.getJSONObject(i);
+//                        String license1=jsonObject.getString("license1");
+//                        String name=jsonObject.getString("name");
+//                        String balance=jsonObject.getString("balance");
+//                        Bean bean=new Bean(license1,name,balance);
+//                        mdata.add(bean);
+//                        System.out.println("license1" + license1 + ";name" + name + ";balance" + balance);
+//
+//                    }
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+
+            }
+        });
+    }
+
+    public void getRetrofit() {
+        //还需要些ApiService、LoginBean
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://rj.zzx1983.com:30034")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        ApiService apiService = retrofit.create(ApiService.class);
+//        Call<LoginBean> call = apiService.getlogin("pad01","123456");
+//        call.enqueue(new Callback<LoginBean>() {
+//            @Override
+//            public void onResponse(Call<LoginBean> call, Response<LoginBean> response) {
+//                LoginBean loginBean= response.body();
+//                Log.e("log",loginBean.message);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<LoginBean> call, Throwable t) {
+//
+//                Log.e("log", "Error" + t.toString());
+//            }
+//        });
+    }
+
 
 }
