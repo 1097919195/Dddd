@@ -24,8 +24,7 @@
         </activity>
 
         <activity android:name=".activity.ViewPagerActivity" />
-        <activity android:name=".activity.TestActivity"
-            android:theme="@style/AppTheme">
+        <activity android:name=".activity.TestActivity">
 
         </activity>
     </application>
