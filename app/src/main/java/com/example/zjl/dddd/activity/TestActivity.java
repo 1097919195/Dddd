@@ -141,7 +141,7 @@ public class TestActivity extends AppCompatActivity {
         UpdateAppUtils.from(this)
                 .checkBy(UpdateAppUtils.CHECK_BY_VERSION_NAME) //更新检测方式，默认为VersionCode
                 .serverVersionCode(2)
-                .serverVersionName("2.0")//要大于1.0
+                .serverVersionName("2.0")
                 .apkPath("https://www.npclo.com/dlo")
                 .showNotification(true) //是否显示下载进度到通知栏，默认为true
                 .updateInfo("更新更新")  //更新日志信息 String
