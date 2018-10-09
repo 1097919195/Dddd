@@ -30,7 +30,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,6 +215,49 @@ public class TestActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    public void HttpURLConnection(View view) {
+        new Thread(new URLConnection()).start();
+    }
+    /**
+     * 读取流中数据的方法
+     */
+    public byte[] readFromStream(InputStream inputStream) throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len ;
+        while ((len = inputStream.read(buffer)) != -1) {
+            outputStream.write(buffer, 0, len);
+        }
+        inputStream.close();
+        return outputStream.toByteArray();
+    }
+
+    private class URLConnection implements Runnable {
+        @Override
+        public void run() {
+            //要再子线程里面进行访问
+            try {
+                URL url = new URL("https://www.baidu.com");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(5000);
+                conn.setRequestMethod("GET");
+                int code = conn.getResponseCode();
+                Log.e("TAG", "Server response：" + code);
+                if (code == 200) {
+                    InputStream in = conn.getInputStream();
+                    byte[] data = readFromStream(in);
+                    String result = new String(data, "UTF-8");
+//                sisters = parseSister(result);
+                    Log.e("TAG","请求成功：" + result);
+                } else {
+                    Log.e("TAG","请求失败：" + code);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
