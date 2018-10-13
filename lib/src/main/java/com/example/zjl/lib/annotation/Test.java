@@ -1,11 +1,13 @@
 package com.example.zjl.lib.annotation;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +21,25 @@ public class Test {
         Collections.addAll(useCases, 47, 48, 49, 50);
         trackUseCases(useCases, PasswordUtils.class);
 
+        //MD5
         System.err.println(stringMD5("6572BDAFF799084B973320F43F09B363"));
+
+        //base64加密
+        String s="";
+        try {
+            String asB64  = Base64.getEncoder().encodeToString("http://www.baidu.com".getBytes("utf-8"));
+            s = asB64;
+            System.err.println("64加密==="+s);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        //base64解密
+        byte[] asBytes = Base64.getDecoder().decode(s);
+        try {
+            System.err.println("64解密===" + new String(asBytes, "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void trackUseCases(List<Integer> useCases, Class<?> cl) {
