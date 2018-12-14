@@ -1,6 +1,6 @@
 package com.example.zjl.lib.test;
 
-public class Father {
+public class Father {//父类
     public Father(String name) {
 
     }
