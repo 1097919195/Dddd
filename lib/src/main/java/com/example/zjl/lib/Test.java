@@ -7,6 +7,9 @@ public class Test extends AA{
         aa.a();
         aa.b();
 
+        //数组再初始化的时候长度就决定了，所以如果需要添加元素的话需要把数组变成arrayList
+        String[] strings = new String[10];
+
     }
 
     @Override
