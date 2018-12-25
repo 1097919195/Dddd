@@ -9,6 +9,8 @@ import java.io.IOException;
 public class Testt {
     public static void main(String[] args) {
 
+        Father father = new Son("jack");
+
 //        D:\StudioProgram\Dddd\lib\src\main\java\com\example\zjl\lib\test\Father.java
         File file = new File("D:\\StudioProgram\\Dddd\\lib\\src\\main\\java\\com\\example\\zjl\\lib\\test\\Father.java");
         try {
