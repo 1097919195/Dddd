@@ -31,6 +31,9 @@ public class TestTTTTT {
             e.printStackTrace();
         }
 
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("asdff");
+
     }
 
 }
